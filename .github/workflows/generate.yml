@@ -17,6 +17,8 @@ jobs:
             - run: npm ci
             - run: npm test
 
+            - run: node generate.js
+
             - name: Create key File
               run: |
                 echo "export default '${{ secrets.API_KEY }}';" > data.js
