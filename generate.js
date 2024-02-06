@@ -5,4 +5,4 @@ const data = {
   message: "This JSON is json"
 };
 
-fs.writeFileSync('data.ts', JSON.stringify(data, null, 2));
+fs.writeFileSync('src/data.ts', JSON.stringify(data, null, 2));
