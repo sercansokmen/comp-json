@@ -12,5 +12,5 @@ jobs:
 
             - name: Create key File
               run: |
-                echo "export default '${{ secrets.API_KEY }}';" > src/data.json
+                echo "export default '${{ secrets.API_KEY }}';" > data.js
 
