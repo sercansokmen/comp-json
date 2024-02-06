@@ -12,4 +12,10 @@ jobs:
 
             - name: Create key File
               run: |
-                echo "export default '${{ secrets.API_KEY }}';" > ./data.json
+                echo "export default '${{ secrets.API_KEY }}';" > src/data.json
+
+            - name: Deploy to GitHub Pages
+              uses: JamesIves/github-pages-deploy-action@v4
+              with:
+                  # branch: main
+                  folder: dist
