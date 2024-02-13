@@ -10,14 +10,7 @@ const apiUrl = 'https://cat-fact.herokuapp.com/facts/';
 
 async function generateData() {
     try {
-        const response = await fetch(apiUrl, {
-            method: "GET", // or 'POST'
-            headers: {
-                "Content-Type": "application/json",
-                // Include the API key in the request header if required by your API
-                Authorization: `Bearer ${apiKey}`,
-            },
-        });
+        const response = await fetch(apiUrl);        
 
         if (!response.ok) {
             throw new Error(`Error fetching data: ${response.statusText}`);
