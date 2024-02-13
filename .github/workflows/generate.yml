@@ -29,9 +29,12 @@ jobs:
               run: |
                 git config --local user.email "action@github.com"
                 git config --local user.name "GitHub Action"
-                git commit -m "Update data.json" || exit 0  # Exit gracefully if no changes
+                git add data.json
+                # Check for any changes. If there are, commit and push them.
+                git diff --staged --quiet || (echo "Changes detected, committing and pushing..." && git commit -m "Update data.json")
+                # Use the PAT for pushing. Replace the remote URL with one that includes the PAT for authentication.
                 git remote set-url origin https://x-access-token:${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/sercansokmen/comp-json.git
-                git push origin HEAD:main  # Adjust branch as needed
+                git push origin HEAD:main  # Ensure this is the correct branch you want to push to.
 
 
 
