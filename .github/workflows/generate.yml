@@ -25,18 +25,13 @@ jobs:
               env:
                 API_KEY: ${{ secrets.API_KEY }}
 
-            - name: Commit changes
-              run: |
-                git config --local user.email "action@github.com"
-                git config --local user.name "GitHub Action"
-                git add data.json
-                git commit -m "Update data.json" -a || echo "No changes to commit"
-              
-            - name: Push changes
-              uses: ad-m/github-push-action@master
+            - name: Deploy to GitHub Pages
+              uses: JamesIves/github-pages-deploy-action@v4
               with:
-                github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-                branch: ${{ github.ref }}
+                branch: main  # The branch the action should deploy to.
+                folder: .  # The folder the action should deploy.
+                single-commit: true  # Optional: Creates a single commit instead of maintaining history
+                commit-message: "Deploy updates"  # Optional: Custom commit message for the deployment commit
 
 
 
