@@ -1,6 +1,8 @@
 name: generate
 
-on: [push]
+on: 
+    schedule:
+      - cron: '* 0/2 * * *'
 
 jobs:
     build-and-deploy:
@@ -14,11 +16,21 @@ jobs:
               with:
                 node-version: 'latest'        
                 
-            - run: npm ci
+            - name: Install dependencies
+              run: npm ci
 
-            - run: node generate.js
+            - name: Generate file
+              run: node generate.js
+              env:
+                API_KEY: ${{ secrets.API_KEY }}
 
-            - name: Create key File
+            - name: Commit and Push
               run: |
-                echo "export default '${{ secrets.API_KEY }}';" > src/data.ts
+               git config --local user.email "action@github.com"
+               git config --local user.name "GitHub Action"
+               git add -f data.json  # Force add the generated file, if it's ignored by .gitignore
+               git commit -m "Update data.json" || exit 0  # Exit gracefully if no changes
+               git push origin HEAD:main  # Adjust branch as needed
+
+
 
