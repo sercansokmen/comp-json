@@ -27,11 +27,11 @@ jobs:
 
             - name: Commit and Push
               run: |
-               git config --local user.email "action@github.com"
-               git config --local user.name "GitHub Action"
-               git add -f data.json  # Force add the generated file, if it's ignored by .gitignore
-               git commit -m "Update data.json" || exit 0  # Exit gracefully if no changes
-               git push origin HEAD:main  # Adjust branch as needed
+                git config --local user.email "action@github.com"
+                git config --local user.name "GitHub Action"
+                git commit -m "Update data.json" || exit 0  # Exit gracefully if no changes
+                git remote set-url origin https://x-access-token:${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/sercansokmen/comp-json.git
+                git push origin HEAD:main  # Adjust branch as needed
 
 
 
