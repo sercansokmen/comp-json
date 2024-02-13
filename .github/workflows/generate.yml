@@ -40,11 +40,16 @@ jobs:
               env:
                 API_KEY: ${{ secrets.API_KEY }}
 
+            - name: Prepare artifact directory
+              run: |
+                mkdir -p artifact
+                mv data.json artifact/
+
            # Update this step to upload only the built content
             - name: Upload artifact
               uses: actions/upload-pages-artifact@v3
               with:
-                path: './data.json' # Change this to the directory where your build script outputs the files
+                path: './artifact' # Change this to the directory where your build script outputs the files
 
             - name: Deploy to GitHub Pages
               id: deployment
